@@ -1,9 +1,8 @@
 import React from 'react'
 import LoginOptions from './LoginOptions.jsx'
-import UserEntries from './UserEntries.jsx'
-import EntrySkeleton from './EntrySkeleton.jsx'
 import SignForm from './SignForm.jsx'
 import { UserAuth } from '../context/AuthContext.jsx'
+import EntryFeed from './EntryFeed.jsx'
 
 const Home = () => {
    const { user } = UserAuth();
@@ -51,22 +50,14 @@ const Home = () => {
          <section className='border-0 md:border-x border-b md:rounded-b-xl border-base-300 flex-grow pb-6 max-w-3xl mx-auto'>
             {/* Sign In */}
             {!user && (
-               <section className='border border-base-300 p-6 m-6 rounded-sm'>
                <LoginOptions/>
-               </section>
             )}
             {/* Sign Form */}
             {user && (
-               <section className='border border-base-300 p-6 m-6 rounded-sm'>
                <SignForm/>
-               </section>
             )}
             {/* Entries */}
-            <section className='mt-6 divide-y border-y border-base-300 divide-base-300' >
-               <UserEntries/>
-               <EntrySkeleton/>
-               
-            </section>
+            <EntryFeed/>
          </section>
       </div>
   )

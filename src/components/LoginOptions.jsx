@@ -27,14 +27,14 @@ const LoginOptions = () => {
     }
 
   return (
-    <>
+    <section className='border border-base-300 p-6 m-6 rounded-sm'>
       <h2 className='text-xl'>Sign in</h2>
       <p>To sign the guestbook, please login using either of the two options below.</p>
       <div className='flex gap-3 mt-3 justify-around'>
          <LoginButtons text="Continue using Google" onclick={handleGoogleSignIn} />
          <LoginButtons text="Continue using GitHub" onclick={handleGithubSignIn} />
       </div>
-    </>
+    </section>
   )
 }
 
