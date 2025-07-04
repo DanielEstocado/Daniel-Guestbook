@@ -4,6 +4,7 @@ import SignForm from './SignForm.jsx'
 import { UserAuth } from '../context/AuthContext.jsx'
 import EntryFeed from './EntryFeed.jsx'
 
+
 const Home = () => {
    const { user } = UserAuth();
 
@@ -47,7 +48,7 @@ const Home = () => {
             </div>
          </section>
          {/* Main content */}
-         <section className='border-0 md:border-x border-b md:rounded-b-xl border-base-300 flex-grow pb-6 max-w-3xl mx-auto'>
+         <section className='border-0 md:border-x border-b md:rounded-b-xl border-base-300 flex-grow pb-6 max-w-3xl mx-auto w-full'>
             {/* Sign In */}
             {!user && (
                <LoginOptions/>
