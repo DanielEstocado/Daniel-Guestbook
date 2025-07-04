@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { UserAuth } from '../context/AuthContext.jsx'
 import { db } from '../utils/firebase.js';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
-import {PaperAirplaneIcon}  from "@heroicons/react/24/solid"
+import {PaperAirplaneIcon, ArrowLeftStartOnRectangleIcon}  from "@heroicons/react/24/solid"
 
 function SignForm() {
   const { logOut, user } = UserAuth();
@@ -47,7 +47,10 @@ function SignForm() {
         </div>
         
         <div>
-          <button className={`bg-primary text-neutral-200  py-2 px-4 rounded-full cursor-pointer`} onClick={handleSignOut}>Logout</button>
+          <button className={`bg-primary text-neutral-200  py-2 px-4 rounded-md cursor-pointer flex justify-center items-center space-x-1`} onClick={handleSignOut}>
+            <span>Logout</span>
+            <ArrowLeftStartOnRectangleIcon className='w-5 h-5 font'/>
+          </button>
         </div>
       </div>
       <form onSubmit={handleSubmit}>
