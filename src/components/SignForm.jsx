@@ -2,11 +2,13 @@ import React, { useState } from 'react'
 import { UserAuth } from '../context/AuthContext.jsx'
 import { db } from '../utils/firebase.js';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import {PaperAirplaneIcon}  from "@heroicons/react/24/solid"
 
 function SignForm() {
   const { logOut, user } = UserAuth();
   const [text, setText] = useState("");
-     
+  const [submitting, isSubmitting] = useState(false);
+
   const handleSignOut = async () => {
     try {
         await logOut();
@@ -19,6 +21,7 @@ function SignForm() {
     e.preventDefault()
     if (!text.trim()) return;
 
+    isSubmitting(true);
     try{
       await addDoc(collection(db, "entries"),{
         name: user.displayName,
@@ -29,6 +32,8 @@ function SignForm() {
       setText("")
     }catch (e){
       console.log("Error in submitting the entry: ", e)
+    } finally{
+      isSubmitting(false)
     }
     
   }
@@ -46,9 +51,12 @@ function SignForm() {
         </div>
       </div>
       <form onSubmit={handleSubmit}>
-        <textarea className='textarea textarea-ghost w-full mt-3 border-primary' placeholder='Write your message...' value={text} onChange={(e)=> setText(e.target.value)}></textarea>
+        <textarea className='textarea textarea-ghost w-full mt-3 border-primary' placeholder='Write your message...' value={text} onChange={(e)=> setText(e.target.value)} disabled={submitting}></textarea>
         <div className='flex gap-3 mt-3 justify-around'>
-          <button className={`bg-primary text-neutral-200 flex-grow p-3 rounded-md cursor-pointer disabled:opacity-50`} type='submit' disabled={!text}>Sign</button>
+          <button className={`bg-primary text-neutral-200 flex-grow flex justify-center items-center space-x-1 p-3 rounded-md cursor-pointer disabled:opacity-50`} type='submit' disabled={!text || submitting}>
+            <span>{submitting ? "Signing..." : "Sign"}</span>
+            <PaperAirplaneIcon className='w-5 h-5'/>
+          </button>
         </div>
       </form>
     </section>
